@@ -127,38 +127,9 @@ def align_images_polynomial_warp(img_base, img_edit, edit_switcheroo=None, degre
         return img_edit
 
 if __name__ == "__main__":
-    from border_detection import remove_borders
 
-    img_1_path = "feedback/1762568527_stage1_input.png"
-    img_2_path = "feedback/1762568527_stage5_ebn.png"
-
-    # img_1_path = "old_outputs_2/1762146099_stage1_input.png"
-    # img_2_path = "old_outputs_2/1762146099_stage5_ebn.png"
-
-    # img_1_path = "old_outputs/1761986733_in.png"
-    # img_2_path = "old_outputs/1761986667_stage0.png"s
-
-    # img_1_path = "outputs/1762589637_stage1_input.png"
-    # img_2_path = "outputs/1762589637_stage4_border.png"
-
-    # img_1_path = "outputs/1762519609_stage1_input.png"
-    # img_2_path = "outputs/1762519609_stage4_border.png"
-
-    # img_1_path = "outputs/1762591631_stage1_input.png"
-    # img_2_path = "outputs/1762591631_stage5_ebn.png"
-
-    img_1_path = "old_outputs_2/1762154237_stage1_input.png"
-    img_2_path = "old_outputs_2/1762154237_stage5_ebn.png"
-
-    
-    img_1_path = "feedback/1762725643_stage5_ebn.png"
-    img_2_path = "feedback/1762725643_stage1a_nose.png"
-    
-    img_1_path = "feedback/1763294680_stage1_input.png"
-    img_2_path = "feedback/1763294680_stage7_final.png"
-
-    img_2_path = "feedback/1780326370_stage5_phase1_pre_skin.png"
-    img_1_path = "feedback/1780326370_stage4_img_fix.png"
+    img_1_path = "pic1.png"
+    img_2_path = "pic2.png"
 
     # Load images
     img1 = cv2.imread(img_1_path) # Base Image
@@ -178,14 +149,9 @@ if __name__ == "__main__":
     else:
         img1 = cv2.resize(img1, (img2.shape[1], img2.shape[0]))
 
-    img2_aligned = align_images_polynomial_warp(np.array(remove_borders(img1)), np.array(remove_borders(img2)), np.array(remove_borders(img2)))
+    img2_aligned = align_images_polynomial_warp(np.array(img1), np.array(img2), np.array(img2))
 
     cv2.imwrite("cv2_outputs/1.png", img1)
     cv2.imwrite("cv2_outputs/2_old.png", img2) 
     cv2.imwrite("cv2_outputs/1_fix.png", np.array(remove_borders(img1)))
     cv2.imwrite("cv2_outputs/2_fix.png", img2_aligned)# img2_aligned)
-    
-
-# set HF_HOME=E:\nunchaku_flux_demos\models
-# set TRANSFORMERS_CACHE=E:\nunchaku_flux_demos\models\transformers_cache
-# python -m huggingface_hub download nunchaku-tech/nunchaku-qwen-image-edit-2509 svdq-int4_r128-qwen-image-edit-2509-lightningv2.0-8steps.safetensors
